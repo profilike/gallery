@@ -1,0 +1,36 @@
+<div class="row text-center" *ngIf="!isLoaded">Loading...</div>
+<div class="row" *ngIf="isLoaded">
+  <div class="col-sm-12">
+      <nav class="nav">
+          <span 
+            [ngClass]="{
+              'nav-link': true,
+              'disabled': filterBy === 'all'
+            }" 
+            (click)="filterBy='all'"
+          >All</span>
+          <span 
+            *ngFor="let album of albums" 
+            [ngClass]="{
+              'nav-link': true,
+              'disabled': filterBy == album.id
+            }" 
+            (click)="onFilterChange(album)" 
+          >
+            {{ album.name | uppercase }}
+          </span>
+      </nav>
+  </div>
+  <div class="col-sm-4" *ngFor="let photo of photos | photoFilter:filterBy">
+      <div class="card">
+          <img class="card-img-top" src="{{photo.url}}" alt="{{photo.caption}}">
+          <div class="card-body">
+            <h6 class="card-title">{{photo.catName}}</h6>
+            <a [routerLink]="['/gallery', photo.id]" class="btn btn-primary">View detail</a>
+            <button class="btn btn-warning">Edit</button>
+            <button class="btn btn-danger" (click)="onDeletePhoto(photo)" >Delete</button>
+          </div>
+      </div>
+  </div>
+</div>
+

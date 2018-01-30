@@ -1,0 +1,19 @@
+<div class="row" *ngIf="!isLoaded">Loading...</div>
+<div class="row" *ngIf="isLoaded">
+  <div class="col-sm-12">
+    <a [routerLink]="'/'">Back to Gallery</a>
+  </div>
+  <div class="col-sm-8">
+    <img src="{{photo.url}}" alt="" class="mw-100">
+  </div>
+  <div class="col-sm-4">
+    <ul class="list-group">
+      <li class="list-group-item"><strong>Id:</strong> {{photo.id}}</li>
+      <li class="list-group-item"><strong>Added:</strong> {{photo.date}}</li>
+    </ul>
+    <hr>
+    <h5>Description:</h5>
+    <p>{{ photo.caption }}</p>
+    <button class="btn btn-warning">Edit</button>
+  </div>
+</div>
