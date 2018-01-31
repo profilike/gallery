@@ -1,0 +1,22 @@
+<h3>Add new album</h3>
+<form>
+  <div class="form-group">
+    <label for="album-name">Album name</label>
+    <input 
+      type="text" 
+      class="form-control" 
+      id="album-name"
+      placeholder="Enter album name"
+      [(ngModel)]="albumName"
+      [ngModelOptions]="{standalone: true}"
+    >
+  </div>
+  <button 
+    type="button" 
+    [disabled]="!albumName"
+    (click)="onAdd()"
+    class="btn btn-success"
+  >
+    <i class="fa fa-plus"></i>
+    Add album</button>
+</form>

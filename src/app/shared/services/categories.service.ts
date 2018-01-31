@@ -16,5 +16,16 @@ export class CategoriesService {
         return this.http.get('http://localhost:3000/categories')
         .map((response: Response) => response.json());   
     }
-    
+    addCategory(album: Album): Observable<Album> {
+        return this.http.post('http://localhost:3000/categories', album)
+        .map((response: Response) => response.json());
+    }
+    updateCategory(album: Album) : Observable<Album>  {
+        return this.http.put(`http://localhost:3000/categories/${album.id}`, album)
+        .map((response: Response) => response.json());
+    }
+    deleteCategory(album: Album) {
+        return this.http.delete(`http://localhost:3000/categories/${album.id}`)
+        .map((response: Response) => response.json());
+    }
 }

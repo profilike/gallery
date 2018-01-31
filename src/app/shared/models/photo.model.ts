@@ -1,5 +1,6 @@
 export class Photo{
     constructor(
+        public name: string,
         public category: number,
         public date: string,
         public caption: string,

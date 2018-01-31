@@ -8,7 +8,7 @@ import { PhotodetailComponent } from "./photodetail/photodetail.component";
 const routes: Routes =  [
     { path: '', component: GalleryComponent },
     { path: 'addphoto' , component: AddphotoComponent },
-    { path: 'editcat' , component: EditcatComponent },
+    { path: 'albums' , component: EditcatComponent },
     { path: 'gallery/:id', component: PhotodetailComponent }
 ]
 

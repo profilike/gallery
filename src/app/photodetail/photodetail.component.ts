@@ -16,7 +16,10 @@ export class PhotodetailComponent implements OnInit, OnDestroy {
   sub: Subscription
   isLoaded = false
   photo: Photo
-  album: Album
+  albums: Album[] = []
+
+  isModalOpen: boolean = false
+  message: string = ""
 
   constructor(
     private route: ActivatedRoute,
@@ -28,11 +31,34 @@ export class PhotodetailComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.sub = this.route.params
       .mergeMap(( params: Params ) => this.photoService.getPhotoById(params['id']) )
-      .subscribe((photo: Photo) => {
+      .mergeMap((photo: Photo) =>{
         this.photo = photo
+        return this.categoriesService.getCategories()
+      })
+      .subscribe((categories: Album[]) => {
+        this.albums = categories
         this.isLoaded = true
       })
   }
+
+  private toggleModalVisibility(dir: boolean) {
+    this.isModalOpen = dir
+  }
+
+  openModal(){
+    this.toggleModalVisibility(true)
+  }
+
+  onModalCancel(){
+    this.toggleModalVisibility(false)
+  }
+
+  photoWasEdited(photo: Photo){
+    this.photo = photo
+    this.message = "Photo was updated"
+    window.setTimeout(() => this.message = '', 5000)
+  }
+
   ngOnDestroy(){
     if(this.sub){
       this.sub.unsubscribe()

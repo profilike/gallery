@@ -1,0 +1,22 @@
+.list-group-item-value{
+    width: 50%;
+    input{
+        background-color: transparent;
+        border-color: transparent;
+        text-transform: uppercase;
+        margin-left: 8px;
+        &:focus{
+            box-shadow: none
+        }
+
+    }
+    &.onEdited{
+        input{
+            background-color: #f7f7f7;
+            border-color: #ced4da;
+        }
+    }
+}
+.fa-picture-o{
+    font-size: 1.2rem;
+}

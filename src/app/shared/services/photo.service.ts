@@ -25,6 +25,11 @@ export class PhotoService {
         .map((response: Response) => response.json());
     }
 
+    updatePhoto(photo: Photo): Observable<Photo> {
+        return this.http.put(`http://localhost:3000/images/${photo.id}`, photo)
+        .map((response: Response) => response.json());
+    }
+
     deletePhoto(photo: Photo) {
         return this.http.delete(`http://localhost:3000/images/${photo.id}`)
         .map((response: Response) => response.json());

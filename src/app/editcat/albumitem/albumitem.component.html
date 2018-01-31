@@ -1,0 +1,39 @@
+<li class="list-group-item d-flex align-items-center list-group-item-secondary">
+    <i class="fa fa-picture-o"></i>
+    <span
+      [ngClass]="{
+        'mr-auto': true,
+        'list-group-item-value' : true,
+        'onEdited' : isEdit
+      }" 
+    >
+      
+      <input 
+        type="text" 
+        class="form-control"
+        [(ngModel)]="album.name"
+        [readonly]="!isEdit"
+      >
+    </span>
+  <button
+    *ngIf="isEdit"
+    class="btn btn-success"
+    (click)="onSave(album)"
+  >
+    <i class="fa fa-check"></i>
+  </button>
+  <button
+    *ngIf="!isEdit"
+    class="btn btn-warning"
+    (click)="onEdit()"
+  >
+    <i class="fa fa-pencil"></i>
+  </button>&nbsp;
+  <button class="btn btn-danger" 
+    *ngIf="album.images === 0"
+    (click)="onDelete(album)"
+  >
+    <i class="fa fa-trash"></i>
+  </button>&nbsp;&nbsp;
+  <span class="badge badge-primary badge-pill" title="number of photos">{{album.images}}</span>
+</li>

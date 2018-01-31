@@ -10,5 +10,6 @@ export class FilterPipe implements PipeTransform{
             return photoList;
         }
         return photoList.filter((photo) => photo.category === +filterBy )
+        
     }
 }

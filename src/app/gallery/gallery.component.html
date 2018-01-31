@@ -25,9 +25,8 @@
       <div class="card">
           <img class="card-img-top" src="{{photo.url}}" alt="{{photo.caption}}">
           <div class="card-body">
-            <h6 class="card-title">{{photo.catName}}</h6>
+            <h6 class="card-title"><i class="fa fa-camera"></i>&nbsp;{{photo.catName}}</h6>
             <a [routerLink]="['/gallery', photo.id]" class="btn btn-primary">View detail</a>
-            <button class="btn btn-warning">Edit</button>
             <button class="btn btn-danger" (click)="onDeletePhoto(photo)" >Delete</button>
           </div>
       </div>

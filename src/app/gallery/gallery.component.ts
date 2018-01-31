@@ -14,16 +14,17 @@ import { Album } from '../shared/models/album.model';
 
 export class GalleryComponent implements OnInit, OnDestroy {
 
+  sub: Subscription
+  isLoaded: boolean = false
+  filterBy?: string = 'all'
+  photos: Photo[] = []
+  albums: Album[] = []
+  cat: Album
+
   constructor(
     private photoService: PhotoService,
     private categoriesService: CategoriesService
   ) { }
-
-  sub: Subscription
-  isLoaded = false
-  filterBy?: string = 'all'
-  photos: Photo[] = []
-  albums: Album[] = []
 
   ngOnInit() {
     this.sub = Observable.combineLatest(
@@ -39,7 +40,10 @@ export class GalleryComponent implements OnInit, OnDestroy {
 
   addNewProp(){
     this.photos.forEach((p) => {
-      p.catName = this.albums.find(c => c.id === p.category).name;
+      this.cat = this.albums.find(a => a.id === p.category);
+      if(this.cat){
+        p.catName = this.cat.name
+      }
     });
   }
   onDeletePhoto(photo: Photo){
@@ -49,13 +53,13 @@ export class GalleryComponent implements OnInit, OnDestroy {
       })
     
   }
+  onFilterChange(album){
+    this.filterBy = album.id
+  }
   ngOnDestroy(){
     if(this.sub){
       this.sub.unsubscribe();
     }
-  }
-  onFilterChange(album){
-    this.filterBy = album.id
   }
 
 }
