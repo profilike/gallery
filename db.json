@@ -12,7 +12,8 @@
     },
     {
       "id": 3,
-      "name": "people"
+      "name": "people",
+      "images": 1
     }
   ],
   "images": [
@@ -39,6 +40,14 @@
       "caption": "woman backlit beach clouds sky sunset evening landscape mountain nature ocean sea outdoors people ",
       "url": "https://cdn.stocksnap.io/img-thumbs/960w/4GMBKNS0S1.jpg",
       "id": 3
+    },
+    {
+      "name": "My awesome image",
+      "category": 1,
+      "date": "01.02.2018 13:02:33",
+      "caption": "qwwqwqw...",
+      "url": "https://cdn.stocksnap.io/img-thumbs/960w/OLRVTGAAS2.jpg",
+      "id": 4
     }
   ]
 }

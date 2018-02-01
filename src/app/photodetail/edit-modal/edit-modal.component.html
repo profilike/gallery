@@ -9,8 +9,8 @@
       </div>
       <form #f="ngForm" (ngSubmit)="onSubmit(f)" >
         <div class="modal-body">
-          <div class="form-group">
-            <label for="name">Name</label>
+          <div class="form-group" [ngClass]="{'has-danger': name.invalid && name.touched}" >
+            <label class="form-control-label" for="name">Name</label>
             <input 
               type="text" 
               class="form-control" 
@@ -20,7 +20,7 @@
               name="name"
               [ngModel]="photo.name"
             >
-            <!-- <small class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+           <small *ngIf="name.invalid && name.touched" class="form-text">The field can not be empty</small>
           </div>
           <div class="form-group">
             <label for="select-album">Change album</label>
@@ -34,8 +34,8 @@
               <option *ngFor="let a of albums" [value]="a.id" >{{a.name}}</option>
             </select>
           </div>
-          <div class="form-group">
-            <label for="caption">Description</label>
+          <div class="form-group" [ngClass]="{'has-danger': caption.invalid && caption.touched}">
+            <label for="caption" class="form-control-label">Description</label>
             <textarea 
               class="form-control" 
               id="caption"
@@ -45,6 +45,7 @@
               name="caption"
               [ngModel]="photo.caption"
             ></textarea>
+            <small *ngIf="caption.invalid && caption.touched" class="form-text">The field can not be empty</small>
           </div>
         </div>
         <div class="modal-footer">

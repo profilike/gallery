@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Album } from '../../shared/models/album.model';
 import { CategoriesService } from '../../shared/services/categories.service';
 
@@ -7,17 +7,15 @@ import { CategoriesService } from '../../shared/services/categories.service';
   templateUrl: './albumitem.component.html',
   styleUrls: ['./albumitem.component.scss']
 })
-export class AlbumitemComponent implements OnInit {
+export class AlbumitemComponent {
 
   @Input() album: Album
   @Output() onAlbumDeleted = new EventEmitter<Album>()
+  @Output() onAlbumUpdated = new EventEmitter<Album>()
 
   isEdit: boolean = false
 
   constructor( private categoriesService: CategoriesService ) { }
-
-  ngOnInit() {
-  }
 
   onEdit(){
     this.isEdit = true
@@ -26,7 +24,7 @@ export class AlbumitemComponent implements OnInit {
     this.isEdit = false
     this.categoriesService.updateCategory(album)
     .subscribe((res) => {
-      
+      this.onAlbumUpdated.emit(res)
     })
   }
 

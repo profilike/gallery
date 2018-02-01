@@ -5,17 +5,18 @@ import { Photo } from '../shared/models/photo.model';
 import { Subscription } from 'rxjs/Subscription';
 import { PhotoService } from '../shared/services/photo.service';
 import { Observable } from 'rxjs/Observable';
+import { Message } from '../shared/models/message.model';
 
 @Component({
-  selector: 'vpb-editcat',
-  templateUrl: './editcat.component.html',
-  styleUrls: ['./editcat.component.scss']
+  selector: 'vpb-albums',
+  templateUrl: './albums.component.html',
+  styleUrls: ['./albums.component.scss']
 })
-export class EditcatComponent implements OnInit, OnDestroy {
+export class AlbumsComponent implements OnInit, OnDestroy {
 
   sub: Subscription
   isLoaded: boolean = false
-  message: string = ''
+  message: Message
   albums: Album[] = []
   photos: Photo[] = []
 
@@ -25,6 +26,7 @@ export class EditcatComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this.message = new Message('danger', '');
     this.sub = Observable.combineLatest(
       this.categoriesService.getCategories(),
       this.photoService.getPhotos()
@@ -46,12 +48,23 @@ export class EditcatComponent implements OnInit, OnDestroy {
   albumWasAdded(album: Album){
     this.albums.push(album)
     this.addNewProp()
-    this.message = "Album added"
-    window.setTimeout(() => this.message = '', 3000)
+    this.addMessage(`Album ${album.name} added`, "success" )
+  }
+
+  albumWasUpdated(album: Album){
+    this.message.text = `Album ${album.name} updated`
+    this.addMessage(`Album ${album.name} updated`, "info" )
   }
 
   albumWasDeleted(album: Album){
     this.albums = this.albums.filter(a => a.id !== album.id)
+    this.addMessage(`Album ${album.name} deleted`, "danger" )
+  }
+
+  private addMessage(text, type ){
+    this.message.text = text
+    this.message.type = type
+    window.setTimeout(() => this.message.text = '', 3000)
   }
 
   ngOnDestroy(){

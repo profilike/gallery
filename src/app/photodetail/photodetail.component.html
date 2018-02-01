@@ -5,8 +5,8 @@
       <p>
         <a [routerLink]="'/'"><i class="fa fa-arrow-left"></i>&nbsp;<strong>Back to gallery</strong></a>
       </p>
-      <div class="alert alert-success" *ngIf="message" >
-        {{ message }}
+      <div class="alert alert-{{message-type}}" *ngIf="message.text" >
+        {{ message.text }}
       </div>
     </div>
     <vpb-viewphoto 

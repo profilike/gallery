@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Album } from '../../shared/models/album.model';
 import { CategoriesService } from '../../shared/services/categories.service';
 
@@ -7,7 +7,7 @@ import { CategoriesService } from '../../shared/services/categories.service';
   templateUrl: './albumform.component.html',
   styleUrls: ['./albumform.component.scss']
 })
-export class AlbumformComponent implements OnInit {
+export class AlbumformComponent {
 
   @Output() onAlbumAdd = new EventEmitter<Album>()
 
@@ -16,9 +16,6 @@ export class AlbumformComponent implements OnInit {
   constructor(
     private categoriesService: CategoriesService
   ) { }
-
-  ngOnInit() {
-  }
 
   onAdd(){
     if( this.albumName === '' ) return;

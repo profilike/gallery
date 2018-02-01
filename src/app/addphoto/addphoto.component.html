@@ -1,3 +1,58 @@
-<p>
-  addphoto works!
-</p>
+<div class="row text-center" *ngIf="!isLoaded">Loading...</div>
+<div class="row" *ngIf="isLoaded" >
+  <div class="col-sm-12 text-center">
+    <h1>Add Photo</h1>
+  </div>
+  <div class="col-sm-8 offset-2">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="alert alert-{{message.type}}" *ngIf="message.text" >{{message.text}}</div>
+        <div class="form-group" [ngClass]="{'has-danger': form.get('url').invalid && form.get('url').touched}">
+          <label>Photo url</label>
+          <input 
+            type="text" 
+            class="form-control"
+            placeholder="Photo url"
+            formControlName="url"
+          >
+          <small *ngIf="form.get('url').invalid && form.get('url').touched" class="form-text">The field can not be empty</small>
+        </div>
+
+        <div class="form-group" [ngClass]="{'has-danger': form.get('name').invalid && form.get('name').touched}">
+          <label>Photo name</label>
+          <input 
+            class="form-control" 
+            placeholder="Photo name"
+            formControlName="name"
+          >
+          <small *ngIf="form.get('name').invalid && form.get('name').touched" class="form-text">The field can not be empty</small>
+        </div>
+        <div class="form-group" [ngClass]="{'has-danger': form.get('category').invalid && form.get('category').touched}">
+          <label>Select album</label>
+          <select 
+            class="form-control"
+            formControlName="category"
+          >
+            <option *ngFor="let a of albums" [value]="a.id" >{{a.name}}</option>
+          </select>
+          <small *ngIf="form.get('category').invalid && form.get('category').touched" class="form-text">The field can not be empty</small>
+        </div>
+        <div class="form-group" [ngClass]="{'has-danger': form.get('caption').invalid && form.get('caption').touched}">
+          <label>Photo description</label>
+          <textarea 
+            class="form-control"
+            rows="3"
+            formControlName="caption"
+          ></textarea>
+          <small *ngIf="form.get('caption').invalid && form.get('caption').touched" class="form-text">
+            <span *ngIf="form.get('caption')['errors']['required']">The field can not be empty</span> 
+            <span *ngIf="form.get('caption')['errors']['minlength'] && form.get('caption')['errors']['minlength']['requiredLength']">
+                Caption must be longer than {{form.get('caption')['errors']['minlength']['requiredLength']}} characters.
+                Now {{form.get('caption')['errors']['minlength']['actualLength']}}. 
+            </span>  
+          </small>
+        </div>
+      <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Add Photo</button>
+      <a class="btn btn-success" [routerLink]="'gallery'" >Go to gallery!</a>
+    </form>
+  </div>
+</div>

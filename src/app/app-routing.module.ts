@@ -2,14 +2,16 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from '@angular/router';
 import { GalleryComponent } from "./gallery/gallery.component";
 import { AddphotoComponent } from "./addphoto/addphoto.component";
-import { EditcatComponent } from "./editcat/editcat.component";
+import { AlbumsComponent } from "./albums/albums.component";
 import { PhotodetailComponent } from "./photodetail/photodetail.component";
+import { NotFoundComponent } from "./shared/components/not-found/not-found.component";
 
 const routes: Routes =  [
-    { path: '', component: GalleryComponent },
-    { path: 'addphoto' , component: AddphotoComponent },
-    { path: 'albums' , component: EditcatComponent },
-    { path: 'gallery/:id', component: PhotodetailComponent }
+    { path: '' , component: AddphotoComponent },
+    { path: 'gallery', component: GalleryComponent },
+    { path: 'gallery/:id', component: PhotodetailComponent },
+    { path: 'albums' , component: AlbumsComponent },
+    { path: '**', component: NotFoundComponent }
 ]
 
 @NgModule({

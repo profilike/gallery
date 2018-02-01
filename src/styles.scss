@@ -1,3 +1,14 @@
 .app-container{
     margin-top: 30px;
 }
+.form-group.has-danger{
+    label, small.form-text{
+        color: tomato;
+    }
+    input, select{
+        border-color: tomato;
+        &:focus{
+            box-shadow: 0 0 0 0.2rem rgba(255,99,71, 0.3)
+        }
+    }
+}

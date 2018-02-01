@@ -5,6 +5,7 @@ import { PhotoService } from '../shared/services/photo.service';
 import { Photo } from '../shared/models/photo.model';
 import { Album } from '../shared/models/album.model';
 import { Subscription } from 'rxjs/Subscription';
+import { Message } from '../shared/models/message.model';
 
 @Component({
   selector: 'vpb-photodetail',
@@ -19,7 +20,7 @@ export class PhotodetailComponent implements OnInit, OnDestroy {
   albums: Album[] = []
 
   isModalOpen: boolean = false
-  message: string = ""
+  message: Message
 
   constructor(
     private route: ActivatedRoute,
@@ -29,6 +30,8 @@ export class PhotodetailComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this.message = new Message('danger', '');
+
     this.sub = this.route.params
       .mergeMap(( params: Params ) => this.photoService.getPhotoById(params['id']) )
       .mergeMap((photo: Photo) =>{
@@ -55,8 +58,9 @@ export class PhotodetailComponent implements OnInit, OnDestroy {
 
   photoWasEdited(photo: Photo){
     this.photo = photo
-    this.message = "Photo was updated"
-    window.setTimeout(() => this.message = '', 5000)
+    this.message.type = "success"
+    this.message.text = "Photo was updated"
+    window.setTimeout(() => this.message.text = '', 5000)
   }
 
   ngOnDestroy(){
