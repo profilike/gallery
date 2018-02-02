@@ -43,9 +43,13 @@
               rows="4"
               #caption="ngModel"
               name="caption"
+              minlength="6"
               [ngModel]="photo.caption"
             ></textarea>
-            <small *ngIf="caption.invalid && caption.touched" class="form-text">The field can not be empty</small>
+            <small *ngIf="caption.invalid && caption.touched" class="form-text">
+              <span *ngIf="caption.errors.minlength">Caption must be longer than 6 characters</span>
+              <span *ngIf="caption.errors.required">The field can not be empty</span>
+            </small>
           </div>
         </div>
         <div class="modal-footer">

@@ -51,7 +51,6 @@ export class GalleryComponent implements OnInit, OnDestroy {
       .subscribe(res => {
         this.photos = this.photos.filter(p => p.id !== +photo.id)
       })
-    
   }
   onFilterChange(album){
     this.filterBy = album.id

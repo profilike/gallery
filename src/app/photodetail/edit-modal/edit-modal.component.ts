@@ -32,6 +32,7 @@ export class EditModalComponent implements OnInit, OnDestroy {
   }
 
   onSubmit( form: NgForm ){
+    
     let { name, album, caption } =  form.value
     const updatePhoto = new Photo( name, +album, this.photo.date, caption, this.photo.url, this.photo.id )
     this.sub = this.photoService.updatePhoto(updatePhoto)

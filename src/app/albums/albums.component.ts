@@ -52,8 +52,7 @@ export class AlbumsComponent implements OnInit, OnDestroy {
   }
 
   albumWasUpdated(album: Album){
-    this.message.text = `Album ${album.name} updated`
-    this.addMessage(`Album ${album.name} updated`, "info" )
+    this.addMessage(`Album updated`, "info" )
   }
 
   albumWasDeleted(album: Album){

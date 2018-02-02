@@ -1,0 +1,28 @@
+@keyframes pace-spinner{
+    from {
+        transform: rotate(0deg);
+    }
+        
+    to {
+        transform: rotate(360deg);
+    }
+}
+    
+        
+
+.loader-animator{
+    display: block;
+    margin: 0 auto;
+    animation: pace-spinner 400ms linear infinite;
+    border-color: rgba(1, 7, 65, 0.4) rgba(1, 7, 65,0) rgba(1, 7, 65, 0) rgba(1, 7, 65,0.4);
+    border-image: none;
+    border-radius: 50%;
+    border-right: 2px solid rgba(1, 7, 65, 0) !important;
+    border-style: solid;
+    border-width: 2px;
+    height: 16px;
+    width: 16px;
+    margin: auto;
+    z-index: 2000;
+}
+    

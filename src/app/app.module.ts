@@ -18,6 +18,7 @@ import { ViewphotoComponent } from './photodetail/viewphoto/viewphoto.component'
 import { AlbumitemComponent } from './albums/albumitem/albumitem.component';
 import { AlbumformComponent } from './albums/albumform/albumform.component';
 import { NotFoundComponent } from './shared/components/not-found/not-found.component';
+import { LoaderComponent } from './shared/components/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { NotFoundComponent } from './shared/components/not-found/not-found.compo
     ViewphotoComponent,
     AlbumitemComponent,
     AlbumformComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    LoaderComponent
   ],
   imports: [  
     BrowserModule,
