@@ -33,8 +33,6 @@ export class BaseApi {
     }
     public delete(url: string = ''): Observable<any> {
         return this.http.delete(this.getUrl(url))
-            .map((response: Response) => response.json())
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
 }

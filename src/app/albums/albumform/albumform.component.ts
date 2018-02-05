@@ -21,12 +21,9 @@ export class AlbumformComponent {
     if( this.albumName === '' ) return;
 
     const album = new Album(this.albumName)
-    this.categoriesService.addCategory(album)
-    .subscribe(( album: Album ) => {
-      this.onAlbumAdd.emit(album)
-      this.albumName = ''
-    })
-
+    this.onAlbumAdd.emit(album)
+    this.albumName = ''
+  
   }
 
 }

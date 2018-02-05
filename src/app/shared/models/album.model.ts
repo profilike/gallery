@@ -5,3 +5,7 @@ export class Album{
         public images?: number
     ){}
 }
+
+export interface Albums {
+    albums: Album[]
+}

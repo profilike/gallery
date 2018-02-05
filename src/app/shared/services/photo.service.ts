@@ -28,6 +28,7 @@ export class PhotoService extends BaseApi {
 
     deletePhoto(photo: Photo) {
         return this.delete(`images/${photo.id}`)
+            .map((response: Response) => photo)
     }
     
 }

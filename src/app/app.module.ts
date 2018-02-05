@@ -3,6 +3,10 @@ import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreRouterConnectingModule } from '@ngrx/router-store'
+import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
@@ -20,6 +24,12 @@ import { AlbumformComponent } from './albums/albumform/albumform.component';
 import { NotFoundComponent } from './shared/components/not-found/not-found.component';
 import { LoaderComponent } from './shared/components/loader/loader.component';
 
+import { albumsReducer } from './redux/reducers/albums.reducers';
+import { photosReducer } from './redux/reducers/photos.reducers';
+import { environment } from '../environments/environment.prod'
+import { AppEffect } from './redux/effects/app.effects';
+import { DropdownDirective } from './shared/directives/dropdown.directive';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,16 +44,28 @@ import { LoaderComponent } from './shared/components/loader/loader.component';
     AlbumitemComponent,
     AlbumformComponent,
     NotFoundComponent,
-    LoaderComponent
+    LoaderComponent,
+    DropdownDirective
   ],
   imports: [  
     BrowserModule,
     HttpModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    EffectsModule.forRoot([AppEffect]),
+    StoreModule.forRoot(
+      { 
+        albumsPage: albumsReducer,
+        photosPage: photosReducer 
+      }),
+    StoreRouterConnectingModule,
+    StoreDevtoolsModule.instrument({
+      logOnly: environment.production
+    })
   ],
   providers: [PhotoService, CategoriesService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { } 
+ 

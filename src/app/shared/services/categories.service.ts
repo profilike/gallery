@@ -6,13 +6,16 @@ import { BaseApi } from '../core/base-api';
 
 @Injectable()
 export class CategoriesService extends BaseApi {
-    constructor(public http: Http){
+    constructor(
+        public http: Http
+    ){
         super(http)
     }   
-    
+      
     getCategories(): Observable<Album[]>{
         return this.get('categories')
     }
+
     getCategoriesById(id: number): Observable<Album>{
         return this.get('categories')  
     }
@@ -24,5 +27,7 @@ export class CategoriesService extends BaseApi {
     }
     deleteCategory(album: Album) {
         return this.delete(`categories/${album.id}`)
+            .map((response: Response) => album)
+            
     }
 }

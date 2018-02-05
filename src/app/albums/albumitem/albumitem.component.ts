@@ -12,6 +12,7 @@ export class AlbumitemComponent {
   @Input() album: Album
   @Output() onAlbumDeleted = new EventEmitter<Album>()
   @Output() onAlbumUpdated = new EventEmitter<Album>()
+  
 
   isEdit: boolean = false
 
@@ -22,17 +23,18 @@ export class AlbumitemComponent {
   }
   onSave(album: Album){
     this.isEdit = false
-    this.categoriesService.updateCategory(album)
-    .subscribe((res) => {
-      this.onAlbumUpdated.emit(res)
-    })
+    this.onAlbumUpdated.emit(album)
   }
 
   onDelete(album: Album){
-    this.categoriesService.deleteCategory(album)
-    .subscribe((res) => {
+    if(album.images > 0){
+      window.confirm(`Are you sure? This album has ${album.images} photos.`) 
+        ? this.onAlbumDeleted.emit(album)
+        : false
+    }else{
       this.onAlbumDeleted.emit(album)
-    })
+    }
+    
   }
 
 }

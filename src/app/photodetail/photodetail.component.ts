@@ -60,13 +60,11 @@ export class PhotodetailComponent implements OnInit, OnDestroy {
     this.photo = photo
     this.message.type = "success"
     this.message.text = "Photo was updated"
-    window.setTimeout(() => this.message.text = '', 5000)
+    window.setTimeout(() => this.message.text = '', 3000)
   }
 
   ngOnDestroy(){
-    if(this.sub){
-      this.sub.unsubscribe()
-    }
+    if(this.sub) this.sub.unsubscribe()
   }
 
 }

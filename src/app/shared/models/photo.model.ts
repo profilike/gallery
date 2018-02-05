@@ -9,3 +9,6 @@ export class Photo{
         public catName?: string
     ){}
 }
+export interface Photos {
+    photos: Photo[]
+}

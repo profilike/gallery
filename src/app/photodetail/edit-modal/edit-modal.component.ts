@@ -20,15 +20,18 @@ export class EditModalComponent implements OnInit, OnDestroy {
 
   sub: Subscription
   currentAlbum: Album
-  currentAlbumId: number
+  currentAlbumId: number = 0
 
   constructor( private photoService: PhotoService ) { }
 
   ngOnInit() {
+
     this.currentAlbum = this.albums
       .find(a => a.id === this.photo.category )
-
-    this.currentAlbumId = this.currentAlbum.id
+    if(this.currentAlbum){
+      this.currentAlbumId = this.currentAlbum.id
+    }
+    
   }
 
   onSubmit( form: NgForm ){

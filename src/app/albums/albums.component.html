@@ -1,5 +1,5 @@
 <div class="text-center" *ngIf="!isLoaded" ><vpb-loader></vpb-loader></div>
-<div class="col-sm-8 offset-2 " *ngIf="isLoaded">
+<div class="col-md-8 offset-md-2 " *ngIf="isLoaded">
   <div class="alert alert-{{message.type}}" *ngIf="message.text" >
     {{ message.text }}
   </div>
@@ -13,7 +13,7 @@
       *ngFor="let album of albums"
       [album]="album"
       (onAlbumDeleted)="albumWasDeleted($event)"
-      (onAlbumUpdated)="albumWasUpdated($event)"
+      (onAlbumUpdated)="albumWasUpdated($event)"  
     >
     </vpb-albumitem>
   </ul>

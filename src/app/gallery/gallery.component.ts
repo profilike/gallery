@@ -1,10 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { PhotoService } from '../shared/services/photo.service';
 import { Photo } from '../shared/models/photo.model';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
-import { CategoriesService } from '../shared/services/categories.service';
 import { Album } from '../shared/models/album.model';
+import { Store } from '@ngrx/store';
+import { AppState } from '../redux/app.state';
+import { GetAlbums } from '../redux/actions/albums.action';
+import { GetPhotos } from '../redux/actions/photos.action';
 
 @Component({
   selector: 'vpb-gallery',
@@ -22,20 +24,23 @@ export class GalleryComponent implements OnInit, OnDestroy {
   cat: Album
 
   constructor(
-    private photoService: PhotoService,
-    private categoriesService: CategoriesService
+    private store: Store<AppState>,
   ) { }
 
   ngOnInit() {
+
+    this.store.dispatch(new GetPhotos())
+    this.store.dispatch(new GetAlbums())
+
     this.sub = Observable.combineLatest(
-      this.photoService.getPhotos(),
-      this.categoriesService.getCategories()
+      this.store.select('albumsPage'),
+      this.store.select('photosPage')
     ).subscribe(data => {
-        this.photos = data[0]
-        this.albums = data[1]
-        this.addNewProp()
-        this.isLoaded = true
-      })
+      this.albums = data[0].albums
+      this.photos = data[1].photos
+      this.addNewProp()
+      this.isLoaded = true
+    })
   }
 
   addNewProp(){
@@ -43,22 +48,19 @@ export class GalleryComponent implements OnInit, OnDestroy {
       this.cat = this.albums.find(a => a.id === p.category);
       if(this.cat){
         p.catName = this.cat.name
+      }else{
+        p.catName = 'uncategorized'
       }
     });
   }
   onDeletePhoto(photo: Photo){
-    this.photoService.deletePhoto(photo)
-      .subscribe(res => {
-        this.photos = this.photos.filter(p => p.id !== +photo.id)
-      })
+    this.store.dispatch({type: 'DELETE_PHOTO', payload: photo})
   }
   onFilterChange(album){
     this.filterBy = album.id
   }
   ngOnDestroy(){
-    if(this.sub){
-      this.sub.unsubscribe();
-    }
+    if(this.sub) this.sub.unsubscribe()
   }
 
 }
