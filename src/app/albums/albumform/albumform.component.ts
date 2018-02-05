@@ -18,7 +18,7 @@ export class AlbumformComponent {
   ) { }
 
   onAdd(){
-    if( this.albumName === '' ) return;
+    if( this.albumName.trim() === '' ) return;
 
     const album = new Album(this.albumName)
     this.onAlbumAdd.emit(album)

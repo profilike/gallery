@@ -7,7 +7,6 @@ import { Message } from '../shared/models/message.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../redux/app.state';
 import { Observable } from 'rxjs/Observable';
-import { GetAlbums } from '../redux/actions/albums.action';
 import { GetPhotos } from '../redux/actions/photos.action';
 import { AppEffect } from '../redux/effects/app.effects';
 import { CategoriesService } from '../shared/services/categories.service';
@@ -43,11 +42,17 @@ export class AddphotoComponent implements OnInit {
 
   private validateForm(){
     this.form = new FormGroup({
-      'url' : new FormControl(null, [Validators.required]),
-      'name' : new FormControl(null, [Validators.required]),
+      'url' : new FormControl(null, [Validators.required, this.noWhitespaceValidator]),
+      'name' : new FormControl(null, [Validators.required, this.noWhitespaceValidator]),
       'category' : new FormControl(null, [Validators.required]),
-      'caption' : new FormControl(null, [Validators.required, Validators.minLength(6)])
+      'caption' : new FormControl(null, [Validators.required, this.noWhitespaceValidator, Validators.minLength(6)])
     })
+  }
+
+  public noWhitespaceValidator(control: FormControl) {
+    let isWhitespace = (control.value || '').trim().length === 0;
+    let isValid = !isWhitespace;
+    return isValid ? null : { 'whitespace': true }
   }
 
   onSubmit(){

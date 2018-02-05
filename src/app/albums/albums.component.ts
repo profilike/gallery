@@ -7,7 +7,6 @@ import { Message } from '../shared/models/message.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../redux/app.state';
 import { GetAlbums } from '../redux/actions/albums.action';
-import { GetPhotos } from '../redux/actions/photos.action';
 import { AppEffect } from '../redux/effects/app.effects';
 import { PhotoService } from '../shared/services/photo.service';
 

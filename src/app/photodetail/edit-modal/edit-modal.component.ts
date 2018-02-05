@@ -32,6 +32,7 @@ export class EditModalComponent implements OnInit {
   onSubmit( form: NgForm ){
     
     let { name, album, caption } =  form.value
+
     const photo = new Photo( name, +album, this.photo.date, caption, this.photo.url, this.photo.id )
  
     this.onPhotoEdit.emit(photo)

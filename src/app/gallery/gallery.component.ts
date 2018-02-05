@@ -5,7 +5,6 @@ import { Observable } from 'rxjs/Observable';
 import { Album } from '../shared/models/album.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../redux/app.state';
-import { GetAlbums } from '../redux/actions/albums.action';
 import { GetPhotos } from '../redux/actions/photos.action';
 import { CategoriesService } from '../shared/services/categories.service';
 

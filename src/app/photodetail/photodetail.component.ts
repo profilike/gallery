@@ -6,7 +6,6 @@ import { Subscription } from 'rxjs/Subscription';
 import { Message } from '../shared/models/message.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../redux/app.state';
-import { GetAlbums } from '../redux/actions/albums.action';
 import { GetPhotoById } from '../redux/actions/photos.action';
 import { AppEffect } from '../redux/effects/app.effects';
 import { CategoriesService } from '../shared/services/categories.service';
@@ -71,7 +70,7 @@ export class PhotodetailComponent implements OnInit, OnDestroy {
     this.appEffects.updateImage$
         .filter(action => action.type === 'UPDATE_PHOTO_SUCCESS')
         .subscribe(res => {
-          this.showMessage(`Album ${photo.name} added`, "success" )
+          this.showMessage(`Photo was updated`, "success" )
         },
         (error) => {
           this.showMessage('Error','danger')

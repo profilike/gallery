@@ -1,5 +1,5 @@
 <div class="text-center" *ngIf="!isLoaded" ><vpb-loader></vpb-loader></div>
-<div class="col-md-8 offset-md-2 " *ngIf="isLoaded">
+<div class="col-md-8 offset-md-2" *ngIf="isLoaded">
   <div class="alert alert-{{message.type}}" *ngIf="message.text" >
     {{ message.text }}
   </div>

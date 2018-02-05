@@ -1,11 +1,10 @@
 import { PhotoAction, PHOTO_ACTION } from "../actions/photos.action";
-import { ALBUM_ACTION, AlbumAction } from "../actions/albums.action";
 
 const initialState = {
     photos: []
 }
 
-export function addPhotoReducer( state = initialState, action: PhotoAction | AlbumAction ) {
+export function addPhotoReducer( state = initialState, action: PhotoAction ) {
     switch(action.type) {
         case PHOTO_ACTION.GET_PHOTOS_SUCCESS: 
             return { 

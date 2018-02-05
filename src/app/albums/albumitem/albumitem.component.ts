@@ -22,8 +22,10 @@ export class AlbumitemComponent {
     this.isEdit = true
   }
   onSave(album: Album){
-    this.isEdit = false
-    this.onAlbumUpdated.emit(album)
+    if(this.album.name.trim()){
+      this.isEdit = false
+      this.onAlbumUpdated.emit(album)
+    }
   }
 
   onDelete(album: Album){

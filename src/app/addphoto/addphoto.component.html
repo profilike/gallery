@@ -6,7 +6,7 @@
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="alert alert-{{message.type}}" *ngIf="message.text" >{{message.text}}</div>
         <div class="form-group" [ngClass]="{'has-danger': form.get('url').invalid && form.get('url').touched}">
-          <label>Photo url </label>
+          <label>Photo url <br/> <small>( for example https://cdn.stocksnap.io/img-thumbs/960w/DEL4GM4BZY.jpg )</small></label>
           <input 
             type="text" 
             class="form-control"
