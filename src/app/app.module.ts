@@ -25,10 +25,12 @@ import { NotFoundComponent } from './shared/components/not-found/not-found.compo
 import { LoaderComponent } from './shared/components/loader/loader.component';
 
 import { albumsReducer } from './redux/reducers/albums.reducers';
-import { photosReducer } from './redux/reducers/photos.reducers';
+import { photosReducer } from './redux/reducers/gallery.reducers';
 import { environment } from '../environments/environment.prod'
 import { AppEffect } from './redux/effects/app.effects';
 import { DropdownDirective } from './shared/directives/dropdown.directive';
+import { addPhotoReducer } from './redux/reducers/addphoto.reducer';
+import { photoDetailReducer } from './redux/reducers/photodetail.reducer';
 
 @NgModule({
   declarations: [
@@ -57,7 +59,9 @@ import { DropdownDirective } from './shared/directives/dropdown.directive';
     StoreModule.forRoot(
       { 
         albumsPage: albumsReducer,
-        photosPage: photosReducer 
+        galleryPage: photosReducer,
+        addPhotoPage: addPhotoReducer,
+        photoDetailPage: photoDetailReducer
       }),
     StoreRouterConnectingModule,
     StoreDevtoolsModule.instrument({

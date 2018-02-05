@@ -1,28 +1,24 @@
-import { Component, OnInit, OnDestroy , Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Photo } from '../../shared/models/photo.model';
 import { Album } from '../../shared/models/album.model';
-import { PhotoService } from '../../shared/services/photo.service';
-import { Subscription } from 'rxjs/Subscription';
-
 
 @Component({
   selector: 'vpb-edit-modal',
   templateUrl: './edit-modal.component.html',
   styleUrls: ['./edit-modal.component.scss']
 })
-export class EditModalComponent implements OnInit, OnDestroy {
+export class EditModalComponent implements OnInit {
 
   @Input() photo: Photo
   @Input() albums: Album[]
   @Output() onPhotoEdit = new EventEmitter<Photo>()
   @Output() onModalCancel = new EventEmitter<any>()
 
-  sub: Subscription
   currentAlbum: Album
   currentAlbumId: number = 0
 
-  constructor( private photoService: PhotoService ) { }
+  constructor( ) { }
 
   ngOnInit() {
 
@@ -31,26 +27,20 @@ export class EditModalComponent implements OnInit, OnDestroy {
     if(this.currentAlbum){
       this.currentAlbumId = this.currentAlbum.id
     }
-    
   }
 
   onSubmit( form: NgForm ){
     
     let { name, album, caption } =  form.value
-    const updatePhoto = new Photo( name, +album, this.photo.date, caption, this.photo.url, this.photo.id )
-    this.sub = this.photoService.updatePhoto(updatePhoto)
-    .subscribe((photo: Photo) => {
-      this.onPhotoEdit.emit(photo)
-      this.onModalCancel.emit()
-    })
+    const photo = new Photo( name, +album, this.photo.date, caption, this.photo.url, this.photo.id )
+ 
+    this.onPhotoEdit.emit(photo)
+    this.onModalCancel.emit()
+
   }
 
   closeModal(){
     this.onModalCancel.emit()
-  }
-
-  ngOnDestroy(){
-    if(this.sub) this.sub.unsubscribe()
   }
 
 }

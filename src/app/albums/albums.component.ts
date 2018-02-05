@@ -9,6 +9,7 @@ import { AppState } from '../redux/app.state';
 import { GetAlbums } from '../redux/actions/albums.action';
 import { GetPhotos } from '../redux/actions/photos.action';
 import { AppEffect } from '../redux/effects/app.effects';
+import { PhotoService } from '../shared/services/photo.service';
 
 @Component({
   selector: 'vpb-albums',
@@ -25,24 +26,25 @@ export class AlbumsComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store<AppState>,
-    private appEffects: AppEffect
+    private appEffects: AppEffect,
+    private photoService: PhotoService
   ) { }
 
   ngOnInit() {
     this.message = new Message('danger', '');
     
-    this.store.dispatch(new GetPhotos())
     this.store.dispatch(new GetAlbums())
 
     this.sub = Observable.combineLatest(
-      this.store.select('albumsPage'),
-      this.store.select('photosPage')
+      this.photoService.getPhotos(),
+      this.store.select('albumsPage')
     ).subscribe(data => {
-      this.albums = data[0].albums
-      this.photos = data[1].photos
+      this.photos = data[0]
+      this.albums = data[1].albums
       this.addNewProp()
       this.isLoaded = true
     })
+
   }
 
   private addNewProp(){

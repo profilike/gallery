@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { Actions, Effect } from '@ngrx/effects'
 import { ALBUM_ACTION, GetAlbums, GetAlbumsSuccess, AddAlbumSuccess, DeleteAlbumSuccess, UpdateAlbumSuccess} from '../actions/albums.action'
-import { GetPhotos, GetPhotosSuccess, AddPhotoSuccess, PHOTO_ACTION, DeletePhotoSuccess, UpdatePhotoSuccess } from '../actions/photos.action'
+import { PHOTO_ACTION, GetPhotos, GetPhotosSuccess, AddPhotoSuccess, DeletePhotoSuccess, UpdatePhotoSuccess, GetPhotoByIdSuccess } from '../actions/photos.action'
 import { CategoriesService } from '../../shared/services/categories.service';
 import { Album } from '../../shared/models/album.model';
 import { Observable } from 'rxjs/Observable';
@@ -38,6 +38,15 @@ export class AppEffect {
       return new GetPhotosSuccess(photos)
     })
 
+  @Effect() getPhotoById$: Observable<Action> = this.actions$
+    .ofType(PHOTO_ACTION.GET_PHOTO_BY_ID)
+    .switchMap((action: any) => {
+      return this.photosService.getPhotoById(action.payload)
+    })
+    .map((photo: Photo) => {
+      return new GetPhotoByIdSuccess(photo)
+    })
+
   @Effect() addAlbum$ = this.actions$
     .ofType('ADD_ALBUM')
     .map((action: any) => action.payload)
@@ -61,6 +70,12 @@ export class AppEffect {
     .map((action: any) => action.payload)
     .switchMap(photo => this.photosService.addPhoto(photo))
     .map(photo => new AddPhotoSuccess(photo)).share();
+
+  @Effect() updateImage$ = this.actions$
+    .ofType('UPDATE_PHOTO') 
+    .map((action: any) => action.payload)
+    .switchMap(photo => this.photosService.updatePhoto(photo))
+    .map(photo => new UpdatePhotoSuccess(photo)).share();
 
   @Effect() deleteImage$ = this.actions$
     .ofType('DELETE_PHOTO') 

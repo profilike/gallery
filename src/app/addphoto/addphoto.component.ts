@@ -10,6 +10,7 @@ import { Observable } from 'rxjs/Observable';
 import { GetAlbums } from '../redux/actions/albums.action';
 import { GetPhotos } from '../redux/actions/photos.action';
 import { AppEffect } from '../redux/effects/app.effects';
+import { CategoriesService } from '../shared/services/categories.service';
 
 @Component({
   selector: 'vpb-addphoto',
@@ -19,19 +20,24 @@ import { AppEffect } from '../redux/effects/app.effects';
 export class AddphotoComponent implements OnInit {
 
   form: FormGroup
-  albums: Observable<Albums>
+  albums: Album[]
   message: Message
 
   constructor(
     private store: Store<AppState>,
-    private appEffects: AppEffect
+    private appEffects: AppEffect,
+    private categoriesService: CategoriesService
   ) { }
 
   ngOnInit() {
     this.message = new Message('danger', '');
-    this.store.dispatch(new GetAlbums())
+  
+    this.categoriesService.getCategories()
+      .subscribe((albums: Album[]) => {
+        this.albums = albums
+      })
     this.store.dispatch(new GetPhotos())
-    this.albums = this.store.select('albumsPage')
+     
     this.validateForm()
   }
 

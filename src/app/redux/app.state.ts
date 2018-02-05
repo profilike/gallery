@@ -5,7 +5,13 @@ export interface AppState {
     albumsPage: {
         albums: Album[]
     },
-    photosPage: {
+    galleryPage: {
         photos: Photo[]
-    } 
+    },
+    addPhotoPage: {
+        photos: Photo[],
+    },
+    photoDetailPage: {
+        photo: Photo
+    }
 }

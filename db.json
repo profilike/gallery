@@ -2,15 +2,16 @@
   "categories": [
     {
       "id": 1,
-      "name": "city"
+      "name": "city",
+      "images": 1
     },
     {
       "id": 2,
       "name": "nature"
     },
     {
-      "id": 3,
-      "name": "people"
+      "name": "people",
+      "id": 3
     }
   ],
   "images": [
@@ -26,12 +27,12 @@
       "name": "img2",
       "category": 2,
       "date": "30.01.2018 20:49:02",
-      "caption": "norway forest Mountains amazing view Colorful Scandinavia landscape nature river rapids trees",
+      "caption": "norway forest Mountains amazing view Colorful Scandinavia landscape nature river rapids trees...",
       "url": "https://cdn.stocksnap.io/img-thumbs/960w/VXVWEI7WWL.jpg",
       "id": 2
     },
     {
-      "name": "img4",
+      "name": "img3",
       "category": 3,
       "date": "31.01.2018 20:49:02",
       "caption": "woman backlit beach clouds sky sunset evening landscape mountain nature ocean sea outdoors people soft",

@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../redux/app.state';
 import { GetAlbums } from '../redux/actions/albums.action';
 import { GetPhotos } from '../redux/actions/photos.action';
+import { CategoriesService } from '../shared/services/categories.service';
 
 @Component({
   selector: 'vpb-gallery',
@@ -25,18 +26,18 @@ export class GalleryComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store<AppState>,
+    private categoriesService: CategoriesService
   ) { }
 
   ngOnInit() {
 
     this.store.dispatch(new GetPhotos())
-    this.store.dispatch(new GetAlbums())
 
     this.sub = Observable.combineLatest(
-      this.store.select('albumsPage'),
-      this.store.select('photosPage')
+      this.categoriesService.getCategories(),
+      this.store.select('galleryPage')
     ).subscribe(data => {
-      this.albums = data[0].albums
+      this.albums = data[0]
       this.photos = data[1].photos
       this.addNewProp()
       this.isLoaded = true

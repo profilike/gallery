@@ -4,7 +4,7 @@ const initialState = {
     albums: []
 }
 
-export function albumsReducer( state = initialState, action: AlbumAction ) {
+export function albumsReducer( state = initialState, action: AlbumAction  ) {
     switch(action.type) {
         case ALBUM_ACTION.GET_ALBUMS_SUCCESS: 
             return { 
